@@ -73,6 +73,7 @@
         };
 
         xhr.onerror = function () {
+          console.error("Failed to fetch " + GITHUB_CONTENT_PATH + "/" + file);
           // location.replace(homepage);
         };
         xhr.open("GET", GITHUB_CONTENT_PATH + "/" + file);
