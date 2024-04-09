@@ -45,6 +45,8 @@
             var content = payload.content;
             if (content) {
               content = atob(content);
+            } else {
+              content = "not found";
             }
             var title = file;
 
