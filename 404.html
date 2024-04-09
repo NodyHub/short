@@ -42,7 +42,10 @@
           try {
             var payload = JSON.parse(xhr.response);
             var message = payload.message;
-            var content = atob(payload.content);
+            var content = payload.content;
+            if (content) {
+              content = atob(content);
+            }
             var title = file;
 
             // Workaround IE 11 lack of support for new URL()
