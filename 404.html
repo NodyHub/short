@@ -63,10 +63,10 @@
 
             if (isInvalidUrl) {
               console.error("Invalid URL: " + content);
-              // location.replace(content);
+              location.replace(homepage);
             } else {
               console.log("Redirecting to: " + content);
-              // location.replace(location.hostname);
+              location.replace(content);
             }
           } catch (e) {
             console.error(e);
