@@ -38,6 +38,7 @@
         console.log(homepage)
 
         var xhr = new XMLHttpRequest();
+        xhr.setRequestHeader("Cache-Control", "no-cache, no-store, max-age=0");
         xhr.onload = function () {
           try {
             var payload = JSON.parse(xhr.response);
