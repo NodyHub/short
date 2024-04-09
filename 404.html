@@ -8,10 +8,11 @@
        * Configuration goes here
        */
       // Format: https://api.github.com/repos/{owner}/{repo}/issues/
-      var GITHUB_ISSUES_LINK =
-        "https://api.github.com/repos/nodyhub/s.gurke.io/issues/";
-      var PATH_SEGMENTS_TO_SKIP = 0;
-
+      var HOST = "s.gurke.io"
+      var GITHUB_USER = "nodyhub";
+      var GITHUB_REPO = "s.gurke.io";
+      var GITHUB_CONTENT_PATH = "https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/short/";
+      var REPLACE_PATH = "https://${HOST}/";
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
@@ -24,17 +25,8 @@
 
       function redirect() {
         var location = window.location;
-        var issueNumber = location.pathname.split("/")[
-          PATH_SEGMENTS_TO_SKIP + 1
-        ];
-        var homepage =
-          location.protocol +
-          "//" +
-          location.hostname +
-          (location.port ? ":" + location.port : "") +
-          "/" +
-          location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
-
+        var file = location.pathname
+        console.log(file)
         var xhr = new XMLHttpRequest();
 
         xhr.onload = function () {
@@ -54,11 +46,11 @@
               !isUrl(title) ||
               url.hostname === location.hostname;
 
-            if (isInvalidUrl) {
-              location.replace(homepage);
-            } else {
-              location.replace(title);
-            }
+            // if (isInvalidUrl) {
+            //   location.replace(homepage);
+            // } else {
+            //   location.replace(title);
+            // }
           } catch (e) {
             location.replace(homepage);
           }
