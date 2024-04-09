@@ -11,8 +11,8 @@
       var HOST = "s.gurke.io"
       var GITHUB_USER = "nodyhub";
       var GITHUB_REPO = "s.gurke.io";
-      var GITHUB_CONTENT_PATH = "https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/short/";
-      var REPLACE_PATH = "https://${HOST}/";
+      var GITHUB_CONTENT_PATH = "https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/short";
+      var PATH_SEGMENTS_TO_SKIP = 0;
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
@@ -25,16 +25,25 @@
 
       function redirect() {
         var location = window.location;
-        var file = location.pathname
+        var file = location.pathname.substring(1)
         console.log(file)
-        sleep(1000)
-        var xhr = new XMLHttpRequest();
+   
+        var homepage =
+          location.protocol +
+          "//" +
+          location.hostname +
+          (location.port ? ":" + location.port : "") +
+          "/" +
+          location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
+        console.log(homepage)
 
+        var xhr = new XMLHttpRequest();
         xhr.onload = function () {
           try {
             var payload = JSON.parse(xhr.response);
             var message = payload.message;
-            var title = payload.title;
+            var content = atob(payload.content);
+            var title = file;
 
             // Workaround IE 11 lack of support for new URL()
             var url = document.createElement("a");
@@ -44,23 +53,25 @@
             var isInvalidUrl =
               message === "Not Found" ||
               !title ||
-              !isUrl(title) ||
+              !isUrl(content) ||
               url.hostname === location.hostname;
 
-            // if (isInvalidUrl) {
-            //   location.replace(homepage);
-            // } else {
-            //   location.replace(title);
-            // }
+            if (isInvalidUrl) {
+              console.error("Invalid URL: " + content);
+              // location.replace(content);
+            } else {
+              console.log("Redirecting to: " + content);
+              // location.replace(location.hostname);
+            }
           } catch (e) {
             location.replace(homepage);
           }
         };
 
         xhr.onerror = function () {
-          location.replace(homepage);
+          // location.replace(homepage);
         };
-        xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
+        xhr.open("GET", GITHUB_CONTENT_PATH + "/" + file);
         xhr.send();
       }
 
