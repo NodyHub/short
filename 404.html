@@ -82,7 +82,10 @@
         xhr.send();
       }
 
-      redirect();
+      var delayInMilliseconds = 1000; //1 second
+      setTimeout(function() {
+        redirect();
+      }, delayInMilliseconds);
     </script>
   </head>
   <body></body>
