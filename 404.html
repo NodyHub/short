@@ -11,13 +11,13 @@
       var HOST = "s.gurke.io"
       var GITHUB_USER = "nodyhub";
       var GITHUB_REPO = "s.gurke.io";
-      var GITHUB_CONTENT_PATH = "https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/short";
+      var GITHUB_CONTENT_PATH = "https://api.github.com/repos/" + GITHUB_USER + "/" + GITHUB_REPO + "/contents/short";
       var PATH_SEGMENTS_TO_SKIP = 0;
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
       function isUrl(url) {
-        // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
+        // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs + "of up to 24 characters
         return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(
           url
         );
