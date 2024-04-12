@@ -92,14 +92,15 @@
             var result = JSON.parse(xhr.responseText);
             if (result.content) {
               var content = atob(result.content);
-              var url = document.createElement("a");
-              url.setAttribute("href", content);
-              if (isUrl(content) && url.hostname !== location.hostname) {
-                location.replace(content);
-              } else {
-                console.error("Invalid URL: " + content);
-                location.replace(homepage);
-              }
+              console.log(content);
+              // var url = document.createElement("a");
+              // url.setAttribute("href", content);
+              // if (isUrl(content) && url.hostname !== location.hostname) {
+              //   location.replace(content);
+              // } else {
+              //   console.error("Invalid URL: " + content);
+              //   location.replace(homepage);
+              // }
             } else {
               console.error("Not found: " + file);
               // location.replace(homepage);
