@@ -38,55 +38,68 @@
         console.log(homepage)
 
         var xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-          try {
-            var payload = JSON.parse(xhr.response);
-            var message = payload.message;
-            var content = payload.content;
-            if (content) {
-              content = atob(content);
-            } else {
-              content = "not found";
-            }
-            var title = file;
+      //   xhr.onload = function () {
+      //     try {
+      //       var payload = JSON.parse(xhr.response);
+      //       var message = payload.message;
+      //       var content = payload.content;
+      //       if (content) {
+      //         content = atob(content);
+      //       } else {
+      //         content = "not found";
+      //       }
+      //       var title = file;
 
-            // Workaround IE 11 lack of support for new URL()
-            var url = document.createElement("a");
-            url.setAttribute("href", content);
+      //       // Workaround IE 11 lack of support for new URL()
+      //       var url = document.createElement("a");
+      //       url.setAttribute("href", content);
 
-            // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
-            var isInvalidUrl =
-              message === "Not Found" ||
-              !title ||
-              !isUrl(content) ||
-              url.hostname === location.hostname;
+      //       // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
+      //       var isInvalidUrl =
+      //         message === "Not Found" ||
+      //         !title ||
+      //         !isUrl(content) ||
+      //         url.hostname === location.hostname;
 
-            if (isInvalidUrl) {
-              console.error("Invalid URL: " + content);
-              location.replace(homepage);
-            } else {
-              console.log("Redirecting to: " + content);
-              location.replace(content);
-            }
-          } catch (e) {
-            console.error(e);
-            location.replace(homepage);
-          }
-        };
+      //       if (isInvalidUrl) {
+      //         console.error("Invalid URL: " + content);
+      //         location.replace(homepage);
+      //       } else {
+      //         console.log("Redirecting to: " + content);
+      //         location.replace(content);
+      //       }
+      //     } catch (e) {
+      //       console.error(e);
+      //       location.replace(homepage);
+      //     }
+      //   };
 
-        xhr.onerror = function () {
-          console.error("Failed to fetch " + GITHUB_CONTENT_PATH + "/" + file);
-          // location.replace(homepage);
-        };
-        xhr.open("GET", GITHUB_CONTENT_PATH + "/" + file);
-        // xhr.setRequestHeader("Cache-Control", "no-cache");
-        xhr.send();
-      }
+      //   xhr.onerror = function () {
+      //     console.error("Failed to fetch " + GITHUB_CONTENT_PATH + "/" + file);
+      //     // location.replace(homepage);
+      //   };
+      //   xhr.open("GET", GITHUB_CONTENT_PATH + "/" + file);
+      //   // xhr.setRequestHeader("Cache-Control", "no-cache");
+      //   xhr.send();
+      // }
 
-      var delayInMilliseconds = 1000; //1 second
-      setTimeout(function() {
-        redirect();
-      }, delayInMilliseconds);
+
+      xhr.open('GET', GITHUB_CONTENT_PATH + "/" + file, true);
+      xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var result = JSON.parse(xhr.responseText);
+          console.log(result);
+        }
+      };
+
+      xhr.send();
+
+      // var delayInMilliseconds = 1000; //1 second
+      // setTimeout(function() {
+      //   redirect();
+      // }, delayInMilliseconds);
     </script>
   </head>
   <body></body>
