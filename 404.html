@@ -48,13 +48,13 @@
               var content = atob(result.content);
               console.log(content);
               window.location.replace(content);
-              document.getElementById("body").innerHTML+= "Redirect to <a href=\"" + content + "\">" + content + "</a>"
+              document.getElementById("body").innerHTML = "Redirect to <a href=\"" + content + "\">" + content + "</a>"
             } else {
-              document.getElementById("body").innerHTML+= "Undefined redirect!";
+              document.getElementById("body").innerHTML = "Undefined redirect!";
               console.error("Not found: " + file);            }
               console.log(result);
           } else {
-            document.getElementById("body").innerHTML+= "Undefined redirect!";
+            document.getElementById("body").innerHTML = "Undefined redirect!";
             console.error("Not found: " + file);
             var delayInMilliseconds = 1000; //1 second
             setTimeout(function() {
