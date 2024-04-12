@@ -84,22 +84,24 @@
       // }
 
 
-      xhr.open('GET', GITHUB_CONTENT_PATH + "/" + file, true);
-      xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+        xhr.open('GET', GITHUB_CONTENT_PATH + "/" + file, true);
+        xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
 
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          var result = JSON.parse(xhr.responseText);
-          console.log(result);
-        }
-      };
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var result = JSON.parse(xhr.responseText);
+            console.log(result);
+          }
+        };
 
-      xhr.send();
+        xhr.send();
 
-      // var delayInMilliseconds = 1000; //1 second
-      // setTimeout(function() {
-      //   redirect();
-      // }, delayInMilliseconds);
+      }
+
+      var delayInMilliseconds = 1000; //1 second
+      setTimeout(function() {
+        redirect();
+      }, delayInMilliseconds);
     </script>
   </head>
   <body></body>
