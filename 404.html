@@ -84,7 +84,7 @@
       // }
 
 
-        xhr.open('GET', GITHUB_CONTENT_PATH + "/" + file, true);
+        xhr.open('GET', GITHUB_CONTENT_PATH + "/" + file, false);
         xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
 
         xhr.onreadystatechange = function () {
