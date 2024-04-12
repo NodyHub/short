@@ -93,6 +93,7 @@
             if (result.content) {
               var content = atob(result.content);
               console.log(content);
+              window.location.replace(content);
               // var url = document.createElement("a");
               // url.setAttribute("href", content);
               // if (isUrl(content) && url.hostname !== location.hostname) {
